@@ -1,6 +1,5 @@
 import RPi.GPIO as GPIO
 from flask import Flask
-import json
 app = Flask(__name__)
 class LED(object):
     R_PIN = 33
@@ -53,7 +52,6 @@ led = LED()
 @app.route("/led/<action>", methods=['GET'])
 def action(action):
     success = True
-    message = action
     try:
         if action == "set_red":
             led.set_red()
@@ -65,13 +63,8 @@ def action(action):
             led.destroy()
         else:
             success = False
-            message = "Unrecognized action."
     except Exception, e:
         success = False
-        message = e.message
-    return json.dumps({
-        'success': success,
-        'message': message
-    })
+    return 'success', 200 if success else 'fail', 200
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=80, debug=True)
+    app.run(host='0.0.0.0', port=8000, debug=True)

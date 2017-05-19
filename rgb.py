@@ -11,8 +11,8 @@ class LED(object):
     PINS = {'pin_R': 33, 'pin_G': 35, 'pin_B': 37}
 
     def set_off(self):
-        for i in pins:
-            GPIO.output(pins[i], GPIO.HIGH)  # Turn off all leds
+        for i in self.PINS:
+            GPIO.output(self.PINS[i], GPIO.HIGH)  # Turn off all leds
 
     def set_red(self):
         self._setColor(self.RED_COLOR)

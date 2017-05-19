@@ -5,8 +5,6 @@ import face_recognition
 import requests
 from PIL import Image
 
-from .led_code import LED
-
 
 def face_detect():
     unknown_image = face_recognition.load_image_file('temp.jpg')
@@ -35,13 +33,15 @@ def grab_image():
     image.save('temp.jpg')
 
 if __name__ == '__main__':
-    led = LED()
-    led.setRed()
+    # requests.get('http://192.168.1.217:8000/led/red')
     while True:
         grab_image()
         match = face_detect()
         if match:
-            led.setGreen()
+            print 'MATCHED'
+            # requests.get('http://192.168.1.217:8000/led/green')
+            pass
         else:
-            led.setRed()
+            # requests.get('http://192.168.1.217:8000/led/red')
+            pass
         time.sleep(1)

@@ -8,16 +8,16 @@ from PIL import Image
 
 ctrl_cmd = ['forward', 'backward', 'left', 'right', 'stop', 'read cpu_temp', 'home', 'distance', 'x+', 'x-', 'y+', 'y-', 'xy_home']
 
-top = Tk()   # Create a top window
-top.title('Sunfounder Raspberry Pi Smart Video Car')
+# top = Tk()   # Create a top window
+# top.title('Sunfounder Raspberry Pi Smart Video Car')
 
 HOST = '192.168.1.217'    # Server(Raspberry Pi) IP address
 PORT = 21567
 BUFSIZ = 1024             # buffer size
 ADDR = (HOST, PORT)
 
-tcpCliSock = socket(AF_INET, SOCK_STREAM)   # Create a socket
-tcpCliSock.connect(ADDR)                    # Connect with the server
+# tcpCliSock = socket(AF_INET, SOCK_STREAM)   # Create a socket
+# tcpCliSock.connect(ADDR)                    # Connect with the server
 
 
 
@@ -49,7 +49,7 @@ def grab_image():
     image.save('temp.jpg')
 
 if __name__ == '__main__':
-    requests.get('http://192.168.1.217:8000/led/set_red')
+    requests.get('http://192.168.1.217:8000/led/set_off')
     while True:
         grab_image()
         match = face_detect()

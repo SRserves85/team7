@@ -8,11 +8,8 @@ class LED(object):
     B_PIN = 37
     RED_COLOR = 0xFF0000
     GREEN_COLOR = 0x00FF00
+    BLUE_COLOR = 0x0000FF
     PINS = {'pin_R': 33, 'pin_G': 35, 'pin_B': 37}
-
-    def set_off(self):
-        for i in self.PINS:
-            GPIO.output(self.PINS[i], GPIO.HIGH)  # Turn off all leds
 
     def set_red(self):
         self._setColor(self.RED_COLOR)
@@ -20,12 +17,14 @@ class LED(object):
     def set_green(self):
         self._setColor(self.GREEN_COLOR)
 
+    def set_blue(self):
+        self._setColor(self.BLUE_COLOR)
+
     def destroy(self):
         try:
             self.p_R.stop()
             self.p_G.stop()
             self.p_B.stop()
-            self.set_off()
             GPIO.cleanup()
         except Exception:
             pass
@@ -69,8 +68,8 @@ def action(action):
             led.set_red()
         elif action == "set_green":
             led.set_green()
-        elif action == "set_off":
-            led.set_off()
+        elif action == "set_blue":
+            led.set_blue()
         elif action == "destroy":
             led.destroy()
         elif action == "setup":
@@ -80,7 +79,7 @@ def action(action):
     except Exception, e:
         success = False
 
-    return 'success', 200 if success else 'fail', 200
+    return 'success' if success else 'fail'
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=8000, debug=True)

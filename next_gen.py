@@ -49,16 +49,14 @@ def grab_image():
     image.save('temp.jpg')
 
 if __name__ == '__main__':
-    # requests.get('http://192.168.1.217:8000/led/red')
+    requests.get('http://192.168.1.217:8000/led/set_red')
     while True:
         grab_image()
         match = face_detect()
         if match:
             print 'MATCHED'
-            # requests.get('http://192.168.1.217:8000/led/green')
-            pass
+            requests.get('http://192.168.1.217:8000/led/set_green')
         else:
             print "NOT MATCHED"
-            # requests.get('http://192.168.1.217:8000/led/red')
-            pass
-        time.sleep(1)
+            requests.get('http://192.168.1.217:8000/led/set_red')
+        time.sleep(2)
